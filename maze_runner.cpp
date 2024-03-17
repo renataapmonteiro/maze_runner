@@ -73,9 +73,9 @@ pos_t load_maze(const char *file_name)
 				}
 			}
 		}
-		fclose(maze_DATA);
-		return initial_pos;
 	}
+	fclose(maze_DATA);
+	return initial_pos;
 }
 
 // Função que imprime o labirinto
@@ -130,8 +130,8 @@ int main(int argc, char *argv[])
 	// chamar a função de navegação
 	bool exit_found = walk(initial_pos);
 
-	//print_maze();
-	// Tratar o retorno (imprimir mensagem)
+	// print_maze();
+	//  Tratar o retorno (imprimir mensagem)
 	printf("rows: %d", num_rows);
 	printf("cols: %d", num_cols);
 	printf("initial i: %d", initial_pos.i);
