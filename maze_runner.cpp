@@ -46,13 +46,15 @@ pos_t load_maze(const char *file_name)
 
 	// Le o numero de linhas e colunas (fscanf)
 	// e salva em num_rows e num_cols
-	if (maze_DATA)
+	if (!maze_DATA)
 	{
-		fscanf(maze_DATA, "%d %d", &num_rows, &num_cols);
+		perror("Erro ao abrir o arquivo");
+		exit(1);
 	}
+	fscanf(maze_DATA, "%d %d\n", &num_rows, &num_cols);
 
 	// Aloca a matriz maze (malloc)
-	char **maze = (char **)malloc(num_rows * sizeof(char *));
+	maze = (char **)malloc(num_rows * sizeof(char *));
 	for (int i = 0; i < num_rows; ++i)
 	{
 		// Aloca cada linha da matriz
@@ -62,6 +64,7 @@ pos_t load_maze(const char *file_name)
 			for (int j = 0; j < num_cols; ++j)
 			{
 				// Le o valor da linha i+1,j do arquivo e salva na posição maze[i][j]
+				fscanf(maze_DATA, "%c ", &maze[i][j]);
 				// Se o valor for 'e' salvar o valor em initial_pos
 				if (maze[i][j] = 'e')
 				{
@@ -70,6 +73,7 @@ pos_t load_maze(const char *file_name)
 				}
 			}
 		}
+		fclose(maze_DATA);
 		return initial_pos;
 	}
 }
@@ -126,7 +130,7 @@ int main(int argc, char *argv[])
 	// chamar a função de navegação
 	bool exit_found = walk(initial_pos);
 
-	print_maze();
+	//print_maze();
 	// Tratar o retorno (imprimir mensagem)
 	printf("rows: %d", num_rows);
 	printf("cols: %d", num_cols);
